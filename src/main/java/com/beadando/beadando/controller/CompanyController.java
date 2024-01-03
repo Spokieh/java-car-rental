@@ -81,13 +81,13 @@ public class CompanyController {
         companyRepository.save(ec);
         return "redirect:/companies";
     }
-//
-//    @GetMapping("/cars/{id}")
-//    public String deleteComapny(@PathVariable Long id) {
-//        companyRepository.deleteById(id);
-//
-//        return "redirect:/companies";
-//
-//    }
+
+    @GetMapping("/companies/{id}")
+    public String deleteCompany(@PathVariable Long id) {
+        companyRepository.deleteById(id);
+
+        return "redirect:/companies";
+
+    }
 
 }
