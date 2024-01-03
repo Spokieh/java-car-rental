@@ -48,39 +48,39 @@ public class CompanyController {
 
         return "redirect:/companies";
     }
-//
-//    @GetMapping("/companies/edit/{id}")
-//    public String editCompany(@PathVariable Long id, Model model) {
-//        Company company = companyRepository.findById(id).get();
-//
-//        if (company == null) {
-//            return "redirect:/companies";
-//        }
-//
-//        model.addAttribute("companies", company);
-//        return "companies_edit";
-//    }
-//
-//    @PostMapping("/companies/{id}")
-//    public String updateCompany(@PathVariable Long id,
-//                            @ModelAttribute("company") Company company,
-//                            Model model) {
-//
-//        Company ec = companyRepository.findById(id).get();
-//
-//        if (ec == null) {
-//            return "redirect:/companies";
-//        }
-//
-//        ec.setId(id);
-//        ec.setName(company.getName());
-//        ec.setAddress(company.getAddress());
-//        ec.setContactInfo(company.getContactInfo());
-//        //carlist
-//
-//        companyRepository.save(ec);
-//        return "redirect:/companies";
-//    }
+
+    @GetMapping("/companies/edit/{id}")
+    public String editCompany(@PathVariable Long id, Model model) {
+        Company company = companyRepository.findById(id).get();
+
+        if (company == null) {
+            return "redirect:/companies";
+        }
+
+        model.addAttribute("company", company);
+        return "companies_edit";
+    }
+
+    @PostMapping("/companies/{id}")
+    public String updateCompany(@PathVariable Long id,
+                            @ModelAttribute("company") Company company,
+                            Model model) {
+
+        Company ec = companyRepository.findById(id).get();
+
+        if (ec == null) {
+            return "redirect:/companies";
+        }
+
+        ec.setId(id);
+        ec.setName(company.getName());
+        ec.setAddress(company.getAddress());
+        ec.setContactInfo(company.getContactInfo());
+        //carlist
+
+        companyRepository.save(ec);
+        return "redirect:/companies";
+    }
 //
 //    @GetMapping("/cars/{id}")
 //    public String deleteComapny(@PathVariable Long id) {
