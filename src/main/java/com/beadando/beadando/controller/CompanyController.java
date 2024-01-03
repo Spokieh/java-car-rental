@@ -5,6 +5,7 @@ import com.beadando.beadando.model.Company;
 import com.beadando.beadando.repository.CarRepository;
 import com.beadando.beadando.repository.CompanyRepository;
 import com.beadando.beadando.service.CarService;
+import com.beadando.beadando.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,20 +18,20 @@ import java.util.List;
 @Controller
 public class CompanyController {
 
-    private CompanyRepository companyRepository;
+    private CompanyService companyService;
 
 
     private CarService carService;
 
-    public CompanyController(CarService carService, CompanyRepository companyRepository) {
+    public CompanyController(CarService carService, CompanyService companyService) {
         super();
         this.carService = carService;
-        this.companyRepository = companyRepository;
+        this.companyService = companyService;
     }
 
     @GetMapping("/companies")
     public String showCompanies(Model model) {
-        model.addAttribute("companies", companyRepository.findAll());
+        model.addAttribute("companies", companyService.getAllComapny());
         model.addAttribute("company", new Company());
         return "companies";
     }
@@ -44,14 +45,14 @@ public class CompanyController {
 
     @PostMapping("/companies/create")
     public String saveCompany(@ModelAttribute("company") Company company) {
-        companyRepository.save(company);
+        companyService.saveCompany(company);
 
         return "redirect:/companies";
     }
 
     @GetMapping("/companies/edit/{id}")
     public String editCompany(@PathVariable Long id, Model model) {
-        Company company = companyRepository.findById(id).get();
+        Company company = companyService.getCompanyById(id);
 
         if (company == null) {
             return "redirect:/companies";
@@ -66,7 +67,7 @@ public class CompanyController {
                             @ModelAttribute("company") Company company,
                             Model model) {
 
-        Company ec = companyRepository.findById(id).get();
+        Company ec = companyService.getCompanyById(id);
 
         if (ec == null) {
             return "redirect:/companies";
@@ -78,13 +79,13 @@ public class CompanyController {
         ec.setContactInfo(company.getContactInfo());
         //carlist
 
-        companyRepository.save(ec);
+        companyService.updateCompany(ec);
         return "redirect:/companies";
     }
 
     @GetMapping("/companies/{id}")
     public String deleteCompany(@PathVariable Long id) {
-        companyRepository.deleteById(id);
+        companyService.deleteCompanyById(id);
 
         return "redirect:/companies";
 
