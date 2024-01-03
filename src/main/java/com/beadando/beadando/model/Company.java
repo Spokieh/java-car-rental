@@ -21,7 +21,7 @@ public class Company {
     private String contactInfo;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private List<Car> cars = new ArrayList<>();
+    private List<Car> carList;
 
     public Company() {
         // Default constructor
@@ -65,11 +65,11 @@ public class Company {
         this.contactInfo = contactInfo;
     }
 
-    public List<Car> getCars() {
-        return cars;
+    public List<Car> getCarList() {
+        return carList;
     }
 
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
     }
 }

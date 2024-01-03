@@ -1,10 +1,14 @@
 package com.beadando.beadando.controller;
 
 import com.beadando.beadando.model.Car;
+import com.beadando.beadando.model.Company;
+import com.beadando.beadando.repository.CompanyRepository;
 import com.beadando.beadando.service.CarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -12,9 +16,13 @@ public class CarController {
 
     private CarService carService;
 
-    public CarController(CarService carService) {
+    private CompanyRepository companyRepository;
+
+
+    public CarController(CarService carService, CompanyRepository companyRepository) {
         super();
         this.carService = carService;
+        this.companyRepository = companyRepository;
     }
 
     @GetMapping("/cars")
@@ -27,7 +35,8 @@ public class CarController {
     @GetMapping("/cars/create")
     public String createCar(Model model) {
         Car newCar = new Car();
-//        newCar.setCompany();
+        List<Company> companies = companyRepository.findAll();
+        model.addAttribute("companies", companies);
         model.addAttribute("car", newCar);
         return "cars_create";
     }
