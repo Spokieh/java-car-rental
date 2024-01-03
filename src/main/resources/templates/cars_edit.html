@@ -83,26 +83,15 @@
                     </div>
 
                     <div class ="form-group">
-<!--                        <label for="company">Company:</label>-->
-
-<!--                        <select id="company" th:field="*{company}" class="form-control">-->
-<!--                            <option th:each="company : ${companies}"-->
-<!--                                    th:value="${company.id}"-->
-<!--                                    th:text="${company.name}"-->
-<!--                                    th:selected="${company.id == car.company.id}">-->
-
-<!--                            </option>-->
-<!--                        </select>-->
-
                             <label for="company">Company:</label>
 
                             <select id="company" th:field="*{company}" class="form-control">
                                 <option th:each="company : ${companies}"
                                         th:value="${company.id}"
-                                        th:text="${company.name}">
+                                        th:text="${company.name}"
+                                        th:selected="${company.id == car.company.id}">
                                 </option>
                             </select>
-
                     </div>
 
                     <div class = "box-footer">

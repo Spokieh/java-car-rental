@@ -20,8 +20,9 @@ public class Company {
     @Column(name = "contactInfo", nullable = false)
     private String contactInfo;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private List<Car> carList;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Car> carList;
+    private List<Car> cars = new ArrayList<Car>();
 
     public Company() {
         // Default constructor
@@ -65,11 +66,11 @@ public class Company {
         this.contactInfo = contactInfo;
     }
 
-    public List<Car> getCarList() {
-        return carList;
+    public List<Car> getCars() {
+        return cars;
     }
 
-    public void setCarList(List<Car> carList) {
-        this.carList = carList;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 }

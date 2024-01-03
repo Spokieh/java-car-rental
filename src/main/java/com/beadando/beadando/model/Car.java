@@ -22,6 +22,7 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Company company;
 
     public Car() {
@@ -33,18 +34,18 @@ public class Car {
         this.model = model;
         this.year = year;
         this.rentalPrice = rentalPrice;
-        this.available = true;
+        this.available = available;
     }
 
     // Constructor with parameters
-    public Car(String brand, String model, int year, double rentalPrice, boolean available, Company company) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.rentalPrice = rentalPrice;
-        this.available = available;
-        this.company = company;
-    }
+//    public Car(String brand, String model, int year, double rentalPrice, boolean available, Company company) {
+//        this.brand = brand;
+//        this.model = model;
+//        this.year = year;
+//        this.rentalPrice = rentalPrice;
+//        this.available = available;
+//        this.company = company;
+//    }
 
     public Long getId() {
         return id;
