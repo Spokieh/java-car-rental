@@ -51,12 +51,14 @@ public class CarController {
     @GetMapping("/cars/edit/{id}")
     public String editCar(@PathVariable Long id, Model model) {
         Car car = carService.getCarById(id);
+        List<Company> companies = companyRepository.findAll();
 
         if (car == null) {
             return "redirect:/cars";
         }
 
         model.addAttribute("car", car);
+        model.addAttribute("companies", companies);
         return "cars_edit";
     }
 
@@ -68,7 +70,7 @@ public class CarController {
         Car ec = carService.getCarById(id);
 
         if (ec == null) {
-            return "redirect:/cars/test";
+            return "redirect:/cars";
         }
 
         ec.setId(id);
