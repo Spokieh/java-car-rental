@@ -27,10 +27,13 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/companies}">Companies Management</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/users/list}">Users Management</a>
+            </li>
         </ul>
         <div class="ml-auto">
             <a th:href="@{/login}" class="btn btn-primary">Login</a>
-            <a th:href="@{/user/save}" class="btn btn-primary">Register</a>
+            <a th:href="@{/users/save}" class="btn btn-primary">Register</a>
 
             <a th:href="@{/logout}" class="btn btn-primary">Logout</a>
         </div>
@@ -43,7 +46,7 @@
         <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class = "text-center"> Create New User </h1>
             <div class = "card-body">
-                <form th:action="@{/user/save}" th:object = "${user}" method="POST">
+                <form th:action="@{/users/save}" th:object = "${user}" method="POST">
                     <div class ="form-group">
                         <label> Name </label>
                         <input

@@ -1,5 +1,6 @@
 package com.beadando.beadando.service.Impl;
 
+import com.beadando.beadando.model.Car;
 import com.beadando.beadando.model.User;
 import com.beadando.beadando.repository.UserRepository;
 import com.beadando.beadando.service.UserService;
@@ -36,5 +37,21 @@ public class UserServiceImpl implements UserService {
         }
 
         return "Please, try again. User wasn't saved";
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).get();
     }
 }

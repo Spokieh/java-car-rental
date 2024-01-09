@@ -21,11 +21,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/","/product/all","/product/{name}","/user/save","/cars/**","/companies/**").permitAll()
+                .requestMatchers("/","/users/save","/cars/**","/companies/**").permitAll()
                 .and()
                 .authorizeHttpRequests()
 //                .requestMatchers("/user/all","/user/**").authenticated()
-                .requestMatchers("/user/all").authenticated()
+                .requestMatchers("/users/list","/users/{id}","/users/edit/{id}").authenticated()
                 .and().formLogin().and().build();
     }
 
