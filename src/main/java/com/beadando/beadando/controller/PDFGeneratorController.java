@@ -1,6 +1,7 @@
 package com.beadando.beadando.controller;
 
 import com.beadando.beadando.service.PDFGeneratorService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ public class PDFGeneratorController {
     }
 
     @GetMapping("/pdf/generate")
+    @PreAuthorize("hasAuthority('MAINTAINER') or hasAuthority('ADMIN') or hasAuthority('USER')")
     public void generatePDF(HttpServletResponse response) throws IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");

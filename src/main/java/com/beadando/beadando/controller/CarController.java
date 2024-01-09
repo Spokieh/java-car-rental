@@ -4,6 +4,7 @@ import com.beadando.beadando.model.Car;
 import com.beadando.beadando.model.Company;
 import com.beadando.beadando.repository.CompanyRepository;
 import com.beadando.beadando.service.CarService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,12 @@ public class CarController {
         this.companyRepository = companyRepository;
     }
 
+
+    @GetMapping("/")
+    public String showCars() {
+        return "index";
+    }
+
     @GetMapping("/cars")
     public String showCars(Model model) {
         model.addAttribute("cars", carService.getAllCars());
@@ -33,6 +40,7 @@ public class CarController {
     }
 
     @GetMapping("/cars/create")
+    @PreAuthorize("hasAuthority('MAINTAINER') or hasAuthority('ADMIN')")
     public String createCar(Model model) {
         Car newCar = new Car();
         List<Company> companies = companyRepository.findAll();
@@ -42,6 +50,7 @@ public class CarController {
     }
 
     @PostMapping("/cars/create")
+    @PreAuthorize("hasAuthority('MAINTAINER') or hasAuthority('ADMIN')")
     public String saveCar(@ModelAttribute("car") Car car) {
         carService.saveCar(car);
 
@@ -49,6 +58,7 @@ public class CarController {
     }
 
     @GetMapping("/cars/edit/{id}")
+    @PreAuthorize("hasAuthority('MAINTAINER') or hasAuthority('ADMIN')")
     public String editCar(@PathVariable Long id, Model model) {
         Car car = carService.getCarById(id);
         List<Company> companies = companyRepository.findAll();
@@ -63,6 +73,7 @@ public class CarController {
     }
 
     @PostMapping("/cars/{id}")
+    @PreAuthorize("hasAuthority('MAINTAINER') or hasAuthority('ADMIN')")
     public String updateCar(@PathVariable Long id,
                                 @ModelAttribute("car") Car car,
                                 Model model) {
@@ -86,6 +97,7 @@ public class CarController {
     }
 
     @GetMapping("/cars/{id}")
+    @PreAuthorize("hasAuthority('MAINTAINER') or hasAuthority('ADMIN')")
     public String deleteCar(@PathVariable Long id) {
         carService.deleteCarById(id);
 
