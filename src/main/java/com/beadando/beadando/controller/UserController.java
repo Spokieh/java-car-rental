@@ -1,15 +1,20 @@
 package com.beadando.beadando.controller;
 
+import com.beadando.beadando.model.Car;
+import com.beadando.beadando.model.Company;
 import com.beadando.beadando.model.User;
 import com.beadando.beadando.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -27,9 +32,25 @@ public class UserController {
         return userService.findUserByName(username);
     }
 
-    @PostMapping("/save")
+//    @PostMapping("/save")
 //    @PreAuthorize("hasAuthority('ADMIN')")
-    public String saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
+//    public String saveUser(@RequestBody User user) {
+//        return userService.saveUser(user);
+//    }
+
+
+    @GetMapping("/save")
+    public String createUser(Model model) {
+        User newUser = new User();
+        model.addAttribute("user", newUser);
+        return "users_create";
+    }
+
+    @PostMapping("/save")
+    public String saveUser(@ModelAttribute("user") User user) {
+        user.setRoles("USER");
+        userService.saveUser(user);
+
+        return "redirect:/";
     }
 }
