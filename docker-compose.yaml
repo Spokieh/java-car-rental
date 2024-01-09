@@ -5,10 +5,10 @@ services:
     image: mysql
     container_name: spring-car-rental-db
     environment:
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: "${mysql_password}"
       MYSQL_DATABASE: car_rental
     ports:
-      - "3307:3306"
+      - "${db_port}:3306"
     networks:
       - network-spring-car-rental
 
@@ -19,10 +19,10 @@ services:
       MYSQL_HOST: spring-car-rental-db
       MYSQL_PORT: 3306
       MYSQL_DB_NAME: car_rental
-      MYSQL_USER: root
-      MYSQL_PASSWORD: pass
+      MYSQL_USER: "${mysql_user}"
+      MYSQL_PASSWORD: "${mysql_password}"
     ports:
-      - "8090:8080"
+      - "${service_port}:8080"
     networks:
       - network-spring-car-rental
 
