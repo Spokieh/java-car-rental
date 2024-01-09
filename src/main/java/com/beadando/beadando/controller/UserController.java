@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Optional<User> findUserByName(@PathVariable String username) {
         return userService.findUserByName(username);
     }
