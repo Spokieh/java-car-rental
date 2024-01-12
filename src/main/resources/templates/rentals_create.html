@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Create new company</title>
+    <title>Rent a car</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -44,47 +44,38 @@
 </nav>
 <br>
 <br>
-<div class = "container">
-    <div class = "row">
-        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class = "text-center"> Create New Company </h1>
-            <div class = "card-body">
-                <form th:action="@{/companies/create}" th:object = "${company}" method="POST">
-                    <div class ="form-group">
-                        <label> Name </label>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center"> Rent a Car </h1>
+            <div class="card-body">
+                <form th:action="@{/rentals/create}" th:object="${rental}" method="POST">
+                    <div class="form-group">
+                        <label> Rent for days </label>
                         <input
-                                type = "text"
-                                name = "name"
-                                th:field = "*{name}"
-                                class = "form-control"
-                                placeholder="Enter name"
+                                type="number"
+                                name="rentalDurationDays"
+                                class="form-control"
+                                th:field="*{rentalDurationDays}"
+                                placeholder="Enter renting days"
+                                min="1"
+                                max="30"
                         />
                     </div>
 
-                    <div class ="form-group">
-                        <label> Address </label>
-                        <input
-                                type = "text"
-                                name = "address"
-                                th:field = "*{address}"
-                                class = "form-control"
-                                placeholder="Enter address"
-                        />
+                    <div class="form-group">
+                        <label for="car">Cars:</label>
+
+                        <select id="car" th:field="*{car}" class="form-control">
+                            <option th:each="car : ${cars}"
+                                    th:value="${car.id}"
+                                    th:text="${car.brand + ' ' + car.model + ' ' + car.year}">
+                            </option>
+                        </select>
                     </div>
 
-                    <div class ="form-group">
-                        <label> Contact Info </label>
-                        <input
-                                type = "text"
-                                name = "contactInfo"
-                                th:field = "*{contactInfo}"
-                                class = "form-control"
-                                placeholder="Enter contactInfo"
-                        />
-                    </div>
-
-                    <div class = "box-footer">
-                        <button type="submit" class = "btn btn-primary">
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
                             Submit
                         </button>
                     </div>

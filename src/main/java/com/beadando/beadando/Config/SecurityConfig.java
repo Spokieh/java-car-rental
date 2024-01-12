@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
 //                .requestMatchers("/user/all","/user/**").authenticated()
-                .requestMatchers("/users/list","/users/{id}","/users/edit/{id}","/pdf/generate").authenticated()
+                .requestMatchers("/users/list","/users/{id}","/users/edit/{id}","/pdf/generate","/rentals/{id}","/rentals/**").authenticated()
                 .and().formLogin().and().build();
     }
 
