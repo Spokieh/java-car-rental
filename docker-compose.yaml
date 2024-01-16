@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: car_rental
     ports:
       - "${db_port}:3306"
+    volumes:
+      - ./mysqlvolume:/var/lib/mysql
     networks:
       - network-spring-car-rental
 
